@@ -5,10 +5,14 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
-# Load the pre-trained model
-model_file = hf_hub_download(repo_id="Jaysum/efficientnet_poultry_disease_model.keras", filename="efficientnet_poultry_disease_model.keras")
+# Define the model repository and file name
+repo_id = "Jaysum/efficientnet_poultry_disease_model.keras"
+model_filename = "efficientnet_poultry_disease_model.keras"
 
-# Load the model
+# Download the model file from Hugging Face
+model_file = hf_hub_download(repo_id=repo_id, filename=model_filename)
+
+# Load the pre-trained model
 model = tf.keras.models.load_model(model_file)
 
 # List of classes the model predicts
@@ -32,7 +36,6 @@ def predict_image(image_stream: io.BytesIO):
     confidence = predictions[0][predicted_class]
 
     # Return prediction results as a dictionary
-    #return {"class": CLASSES[predicted_class], "confidence": confidence}
     return {
         "class": CLASSES[predicted_class],
         "confidence": confidence.item()  # Convert numpy.float32 to native float
