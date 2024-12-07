@@ -1,3 +1,4 @@
+from huggingface_hub import hf_hub_download
 from fastapi import FastAPI, UploadFile
 import io
 import tensorflow as tf
@@ -5,7 +6,10 @@ import numpy as np
 from PIL import Image
 
 # Load the pre-trained model
-model = tf.keras.models.load_model('./efficientnet_poultry_disease_model.keras')
+model_file = hf_hub_download(repo_id="Jaysum/efficientnet_poultry_disease_model.keras", filename="efficientnet_poultry_disease_model.keras")
+
+# Load the model
+model = tf.keras.models.load_model(model_file)
 
 # List of classes the model predicts
 CLASSES = ['coccidiosis', 'healthy', 'newcastle disease', 'salmo']

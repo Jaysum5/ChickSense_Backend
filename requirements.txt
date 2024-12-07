@@ -5,3 +5,4 @@ Pillow==11.0.0
 tensorflow==2.18.0
 uvicorn
 python-multipart
+huggingface_hub
